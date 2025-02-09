@@ -67,5 +67,43 @@ Almirajは、bool型に相当する`bit`型を提供します：
 - 符号付き整数型は直接数値を指定 (例: `int8`)
 - 数値は使用するビット数を示します
 
-## 使用例
-Almirajの基本構文例:
+## 文法仕様
+
+### 変数宣言
+変数宣言は必ず型を明示的に指定する必要があります：
+```almiraj
+uint8 counter = 0;
+bit flag = 1;
+```
+
+### 関数定義
+関数定義も戻り値の型を明示的に指定します：
+```almiraj
+fn add(uint32 a, uint32 b) -> uint32 {
+    return a + b;
+}
+
+global fn kernel(uint32 n) {
+    uint32 idx = blockIdx.x * blockDim.x + threadIdx.x;
+}
+```
+
+### 制御構文
+条件式の型は必ずbit型（boolean）である必要があります：
+```almiraj
+if (x > 0) {
+    // 処理
+}
+
+while (is_running) {
+    // 処理
+}
+
+for (uint32 i = 0; i < 10; i = i + 1) {
+    // 処理
+}
+```
+
+### 型推論
+現バージョンではすべての型を明示的に指定する必要があります。
+型推論は将来のアップデートで実装予定です。

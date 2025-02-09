@@ -1,3 +1,5 @@
+pub mod bitset;
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum PrimitiveType {
     // 2値型（booleanなど）
@@ -72,5 +74,10 @@ impl PrimitiveType {
             PrimitiveType::Int32 => (-2_147_483_648, 2_147_483_647),
             PrimitiveType::Int64 => (-9_223_372_036_854_775_808, 9_223_372_036_854_775_807),
         }
+    }
+
+    /// ビット変数をグループ化してBitSet8を作成するかを判断
+    pub fn should_use_bitset(&self) -> bool {
+        matches!(self, PrimitiveType::Bit)
     }
 }
